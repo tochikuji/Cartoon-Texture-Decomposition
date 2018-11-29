@@ -33,4 +33,4 @@ def channelwiseLTV(img: numpy.ndarray, sigma=2.):
 
         ltv_img[:, :, k] = ltv_prid
 
-    return ltv_img
+    return ltv_img.mean(axis=2, dtype=numpy.float32)

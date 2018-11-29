@@ -22,6 +22,7 @@ def iterative_decompose(img: numpy.ndarray, sigma: float, n_iter=5, ksize=(5, 5)
             im_high = calib_minmax(im_high)
 
         im_low = img_ - im_high
+
         return im_low, im_high
 
 

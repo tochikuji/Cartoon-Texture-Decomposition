@@ -33,8 +33,12 @@ class CartoonTextureDecomposition:
             raise ValueError(f"gray-scaled (h, w), or BGR-coloured (h, w, c) must be specified; but {img.shape} given")
 
     def __rrr_LTV(self, img: numpy.ndarray, lowpassed_img):
-        imLTV = LTV(img, self.sigma)
-        imLTV_lpf = LTV(lowpassed_img, self.sigma)
+        if self.mode == 'gray':
+            imLTV = LTV(img, self.sigma)
+            imLTV_lpf = LTV(lowpassed_img, self.sigma)
+        else:
+            imLTV = channelwiseLTV(img, self.sigma)
+            imLTV_lpf = channelwiseLTV(lowpassed_img, self.sigma)
 
         diffLTV = imLTV - imLTV_lpf
 
@@ -63,28 +67,47 @@ class CartoonTextureDecomposition:
             r3_map = self.__rrr_LTV(img, im_low)
             weightmap = numpy.vectorize(self.soft_threshold(a1, a2))(r3_map)
 
+            if self.mode == 'color':
+                weightmap = numpy.asarray([weightmap] * 3, dtype=numpy.float32)
+
             cartoon = weightmap * im_low + (1 - weightmap) * img_
             texture = img_ - cartoon
 
-            return cartoon, texture
+            return cartoon.astype(numpy.float32), texture.astype(numpy.float32)
 
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
 
-    img = cv2.imread('/home/aiga/Dropbox/misc/testimage/lenna_256.jpg', 0)
+    filename = '/home/aiga/Dropbox/misc/testimage/lenna_256.jpg'
+    img = cv2.imread(filename, 0)
     obj = CartoonTextureDecomposition(sigma=2, ksize=7)
 
     cartoon, texture = obj.decompose(img)
 
-    plt.figure(figsize=(20, 20), dpi=320)
-    plt.subplot(311)
+    plt.figure(figsize=(10, 10), dpi=320)
+
+    plt.subplot(321)
     plt.imshow(img, cmap='gray')
 
-    plt.subplot(312)
+    plt.subplot(323)
     plt.imshow(cartoon, cmap='gray')
 
-    plt.subplot(313)
+    plt.subplot(325)
     plt.imshow(texture, cmap='gray')
+
+    img_color = cv2.imread(filename)
+
+    cartoon_color, texture_color = obj.decompose(img_color)
+    mlp = lambda x: cv2.cvtColor(x, cv2.COLOR_BGR2RGB)
+
+    plt.subplot(322)
+    plt.imshow(mlp(img_color))
+
+    plt.subplot(324)
+    plt.imshow(mlp(cartoon_color))
+
+    plt.subplot(326)
+    plt.imshow(mlp(texture_color))
 
     plt.show()
