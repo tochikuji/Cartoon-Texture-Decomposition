@@ -7,6 +7,20 @@ from cartex import expect_valid_float_image
 
 
 def iterative_decompose(img: numpy.ndarray, sigma: float, n_iter=5, ksize=(5, 5)):
+    """
+    Decompose the image into high-freq and low-freq parts with iterative [LH]PF algorithm.
+
+    Args:
+        img: input image
+        sigma: variation of Gaussian
+        n_iter: number of iteration
+        ksize: kernel size of Gaussian filter
+
+    Returns:
+        tuple of decomposed images (low_freq, high_freq)
+
+    """
+
     with expect_valid_float_image(img) as img_:
         im_low = cv2.GaussianBlur(img_, ksize, sigma, borderType=cv2.BORDER_REFLECT)
         im_high = img_ - im_low
@@ -27,10 +41,34 @@ def iterative_decompose(img: numpy.ndarray, sigma: float, n_iter=5, ksize=(5, 5)
 
 
 def iterativeLPF(img: numpy.ndarray, sigma: float, n_iter=5, ksize=(5, 5)):
+    """
+    Iterative LPF
+
+    Args:
+        img: input image
+        sigma: variation of Gaussian
+        n_iter: number of iteration
+        ksize: kernel size of Gaussian filter
+
+    Returns:
+        result image of LPF
+    """
     return iterative_decompose(img, sigma, n_iter, ksize)[0]
 
 
 def iterativeHPF(img: numpy.ndarray, sigma: float, n_iter=5, ksize=(5, 5)):
+    """
+    Iterative HPF
+
+    Args:
+        img: input image
+        sigma: variation of Gaussian
+        n_iter: number of iteration
+        ksize: kernel size of Gaussian filter
+
+    Returns:
+        result image of HPF
+    """
     return iterative_decompose(img, sigma, n_iter, ksize)[1]
 
 

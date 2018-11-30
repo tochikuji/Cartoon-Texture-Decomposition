@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76fd9663-514c-4cce-b165-202dc2aff996" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartex/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/cartex/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cartex/decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/cartex/decomposition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cartex/iterative_lpf.py" beforeDir="false" afterPath="$PROJECT_DIR$/cartex/iterative_lpf.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cartex/decomposition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+            <state relative-caret-position="1196">
+              <caret line="167" selection-start-line="167" selection-end-line="167" />
               <folding>
                 <element signature="e#0#66#0" expanded="true" />
               </folding>
@@ -49,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cartex/iterative_lpf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1222">
-              <caret line="48" column="7" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
+            <state relative-caret-position="1846">
+              <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
               <folding>
                 <element signature="e#0#66#0" expanded="true" />
               </folding>
@@ -101,9 +100,9 @@
         <option value="$PROJECT_DIR$/cartex/iterativeLPF.py" />
         <option value="$PROJECT_DIR$/cartex/tools.py" />
         <option value="$PROJECT_DIR$/cartex/ltv.py" />
+        <option value="$PROJECT_DIR$/cartex/__init__.py" />
         <option value="$PROJECT_DIR$/cartex/decomposition.py" />
         <option value="$PROJECT_DIR$/cartex/iterative_lpf.py" />
-        <option value="$PROJECT_DIR$/cartex/__init__.py" />
       </list>
     </option>
   </component>
@@ -241,12 +240,12 @@
       <updated>1543400195000</updated>
       <workItem from="1543400202814" duration="15148000" />
       <workItem from="1543469797129" duration="146000" />
-      <workItem from="1543469952314" duration="1887000" />
+      <workItem from="1543469952314" duration="6380000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17181000" />
+    <option name="totallyTimeSpent" value="21674000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1926" height="2112" extended-state="0" />
@@ -257,7 +256,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946293" visible="true" weight="0.3285568" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946293" weight="0.3285568" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39969292" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -297,20 +296,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cartex/iterative_lpf.py">
+    <entry file="file://$PROJECT_DIR$/cartex/decomposition.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1222">
-          <caret line="48" column="7" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
+        <state relative-caret-position="1196">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
           <folding>
             <element signature="e#0#66#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cartex/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -321,10 +313,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cartex/decomposition.py">
+    <entry file="file://$PROJECT_DIR$/cartex/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+        <state relative-caret-position="78">
+          <caret line="3" column="59" selection-start-line="3" selection-start-column="59" selection-end-line="3" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cartex/iterative_lpf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1846">
+          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
           <folding>
             <element signature="e#0#66#0" expanded="true" />
           </folding>

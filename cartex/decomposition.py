@@ -9,7 +9,21 @@ from cartex import LTV, channelwiseLTV
 
 
 class CartoonTextureDecomposition:
+    """
+    Cartoon+Texture decomposition method proposed by Baudes et al.
+    """
+
     def __init__(self, sigma=2, ksize=5, n_iter=5, threshold_fun=None):
+        """
+        Initialize decomposer with parameters
+        Args:
+            sigma: variation of the Gaussian filter. sigma=2 by default as with the original paper.
+            ksize: kernel size of Gaussian filter. Small ksize make algorithm faster while inprecise.
+            n_iter: Iteration of iterative LPF.
+            threshold_fun: Specifying soft threshold function [0, 1] -> [0, 1] that must be a BVF.
+                           If it is None, partial linear function made with a0, a1 will be adopted.
+        """
+
         self.ksize = (ksize, ksize)
         self.sigma = sigma
         self.n_iter = n_iter
@@ -18,6 +32,13 @@ class CartoonTextureDecomposition:
         self.mode = 'gray'
 
     def __mode(self, img: numpy.ndarray):
+        """
+        Deduce whether the image has colored.
+        Args:
+            img: image
+
+        """
+
         if len(img.shape) == 2:
             self.mode = 'gray'
         elif len(img.shape) == 3:
@@ -33,6 +54,17 @@ class CartoonTextureDecomposition:
             raise ValueError(f"gray-scaled (h, w), or BGR-coloured (h, w, c) must be specified; but {img.shape} given")
 
     def __rrr_LTV(self, img: numpy.ndarray, lowpassed_img):
+        """
+        Relative reduction rate of LTV.
+
+        Args:
+            img: original image
+            lowpassed_img: the image applied a LPF.
+
+        Returns:
+            the map of relative reduction rates corresponding to each pixel
+        """
+
         if self.mode == 'gray':
             imLTV = LTV(img, self.sigma)
             imLTV_lpf = LTV(lowpassed_img, self.sigma)
@@ -45,6 +77,18 @@ class CartoonTextureDecomposition:
         return diffLTV / imLTV
 
     def soft_threshold(self, a1, a2):
+        """
+        Get the threshold function.
+        If the threshold_fun has specified in __init__, this returns a specified one.
+        Otherwise this generate the partial linear BVF with two control point.
+
+        Args:
+            a1:
+            a2:
+
+        Returns:
+            Soft threshold function: [0, 1] -> [0, 1]
+        """
         if callable(self.threshold_fun):
             return self.threshold_fun
 
@@ -61,6 +105,18 @@ class CartoonTextureDecomposition:
             return _soft_threshold
 
     def decompose(self, img: numpy.ndarray, a1=0.25, a2=0.5) -> Tuple[numpy.ndarray, numpy.ndarray]:
+        """
+        Decompose the image into cartoon part and texture part.
+
+        Args:
+            img: Input image which has (h, w) shape grayscaled image or the (h, w, c) shaped colored one.
+            a1: first control point of soft threshold
+            a2: second control point of soft threshold
+
+        Returns:
+            tuple of the image (cartoon, texture)
+        """
+
         with expect_valid_float_image(img) as img_:
             # L_\sigma * f
             im_low = iterativeLPF(img_, sigma=self.sigma, n_iter=self.n_iter, ksize=self.ksize)

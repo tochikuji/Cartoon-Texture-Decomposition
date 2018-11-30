@@ -18,7 +18,6 @@ def expect_valid_float_image(img: numpy.array):
 
     Args:
         img: numpy.ndarray
-
     """
 
     fimg = img.astype(numpy.float32)
