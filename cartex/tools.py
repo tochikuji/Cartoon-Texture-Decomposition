@@ -6,10 +6,11 @@ import cv2
 
 
 @contextlib.contextmanager
-def expect_valid_float_image(img: numpy.array):
+def expect_valid_float_image(img: numpy.array, normalize=False):
     """
-    convert given image to valid floating point valued image, which has a type of 32-bits float
+    Convert given image to valid floating point valued image, which has a type of 32-bits float
     and has a value in [0-1].
+    If the input were integer image, this'll consider the maximum value of the range.
     This context does not change source image.
 
     Example:
@@ -22,10 +23,14 @@ def expect_valid_float_image(img: numpy.array):
 
     fimg = img.astype(numpy.float32)
 
-    if fimg.min() < 0.:
-        fimg -= fimg.min()
+    if img.dtype == numpy.uint8:
+        fimg /= 0xff
 
-    if fimg.max() > 1.:
-        fimg /= fimg.max()
+    elif normalize:
+        if fimg.min() < 0.:
+            fimg -= fimg.min()
+
+        if fimg.max() > 1.:
+            fimg /= fimg.max()
 
     yield fimg
